@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <properties>
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf8&amp;
+                  serverTimezone=Asia/Shanghai"/>
+        <property name="username" value="root"/>
+        <property name="password" value="password"/>
+    </properties>
+
+    <settings>
+        <!-- 设置是否启动缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 设置是否启用懒加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper resource="mapper/OrdersMapper.xml"/>
+        <mapper resource="mapper/CustomerMapper.xml"/>
+        <!--扫描使用注解的类-->
+        <mapper class="com.shentu.mapper.AdminMapper"/>
+    </mappers>
+</configuration>
+
+
+

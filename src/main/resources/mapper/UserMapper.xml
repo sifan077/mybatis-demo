@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shentu.mapper.UserMapper">
+
+    <!--配置类变量与数据库表列名的映射-->
+    <resultMap id="UserMap" type="com.shentu.pojo.User">
+        <!-- id为主键 -->
+        <id column="id" property="id"/>
+        <!-- column是数据库表的列名 , property是对应实体类的属性名 -->
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+
+    <select id="select" resultMap="UserMap">
+        select id, name, password
+        from user
+    </select>
+
+
+    <select id="selectAll" resultType="com.shentu.pojo.User">
+        select *
+        from user
+    </select>
+    <select id="selectById" resultType="com.shentu.pojo.User">
+        select *
+        from user
+        where id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.shentu.pojo.User">
+        insert into user(name, password)
+        values (#{name}, #{password})
+    </insert>
+    <update id="update" parameterType="com.shentu.pojo.User">
+        update user
+        set name = #{name},
+            age  = #{age}
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="com.shentu.pojo.User">
+        delete
+        from user
+        where id = #{id}
+    </delete>
+    <select id="selectByName" resultType="com.shentu.pojo.User">
+        select *
+        from user
+        where name like "%${name}%"
+        <!--等价于  select * from user where name like "%"#{name}"%"-->
+    </select>
+
+    <select id="selectByParams" parameterType="java.util.HashMap" resultType="com.shentu.pojo.User">
+        select id, name, password
+        from user
+        where name = #{name}
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shentu.mapper.CustomerMapper">
+    <resultMap id="selectUserOrderByIdMap" type="com.shentu.pojo.Customer" autoMapping="true">
+        <id column="cid" property="cid"/>
+        <collection property="ordersList" ofType="com.shentu.pojo.Orders" autoMapping="true">
+            <id column="oid" property="oid"/>
+        </collection>
+    </resultMap>
+    <select id="selectUserOrderById" resultMap="selectUserOrderByIdMap">
+
+        select * from customer,orders where customer.cid = #{cid} and orders.cid = customer.cid
+    </select>
+</mapper>
